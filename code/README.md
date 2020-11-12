@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# Getting Started with the Client App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Quick Start
+1. `cd` into `backend-video`
+2. Run `npm install`
+3. Run `npm start`. This starts the **video backend**.
+4. In a seperate terminal run `ngrok http 3000` to open the port
+5. Create or edit your `.env` so that you have the environment variable: `REACT_APP_SOCKET_URL=wss://[YOUR_CODE_HERE].ngrok.io` which is used to communicate to the server. Make sure to have `wss` instead of `https`.
+6. `cd` into the repo directory
+7. run `npm install`
+8. run `npm start`
 
 ## Available Scripts
 
