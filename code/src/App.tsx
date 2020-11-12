@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>StudySesh</h1>
       </header>
+      <div className="App-menu">
+        <button onClick={() => console.log("Hehe")}>
+          Start a sesh
+        </button>
+        <button onClick={() => console.log("U have no friends")}>
+          Join a sesh
+        </button>
+      </div>
     </div>
   );
 }
