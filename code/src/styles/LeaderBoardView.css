@@ -1,0 +1,14 @@
+.answer-card {
+    margin: 0.3em 1em;
+    background-color: #93feff !important;
+    padding: 0.5em;
+}
+
+.summary-card {
+    margin: 1em;
+    padding: 1em;
+}
+
+/*.leaderboard-view {*/
+/*    height: 70vh;*/
+/*}*/
