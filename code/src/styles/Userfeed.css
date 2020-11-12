@@ -1,0 +1,51 @@
+.user-feeds {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 3rem;
+}
+
+.user-feed {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.user-feed img.feed {
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.user-feed .crown {
+  display: block;
+  width: 100px;
+  position: absolute;
+  top: 20%;
+  left: 25%;
+}
+
+.submit {
+  display: inline-block !important;
+}
+
+.MuiOutlinedInput-input {
+  border: 1px solid white !important;
+  border-radius: 3px;
+  color: white !important;
+  text-align: center;
+}
+
+.score {
+
+}
+
+.feed {
+
+}
+
+.username {
+  margin: 0;
+}
