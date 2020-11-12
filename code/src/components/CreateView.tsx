@@ -1,5 +1,4 @@
 import React, {FormEvent, useEffect, useState} from "react";
-import axios from 'axios';
 
 import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
@@ -12,17 +11,21 @@ export default function CreateView() {
     const [sessionId, setSessionId]: [string, (arg: string) => void] = useState("")
 
     useEffect(() => {
-        console.log("post request");
-        axios.post('/create-session', {})
-            .then(res =>{
-                console.log("complete")
+        fetch('/create-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+            .then(res => res.json()).then(data => setSessionId(data.token))
+            .catch(err => {
+                console.error(err);
             })
-            .catch(err => console.error(err))
     }, [])
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // console.log(studySet);
         console.log(username);
     }
     return (
@@ -30,17 +33,16 @@ export default function CreateView() {
             <Logo/>
             <h3>Start a new Sesh</h3>
             <form className="form-group" onSubmit={onSubmit} autoComplete="off">
-                <Grid container spacing={1}>
-                    {/*<Grid container item spacing={1} xs={12} md={12}>*/}
-                    {/*    <Grid item md={6} xs={6}>*/}
-                    {/*        <h5>Sesh Number</h5>*/}
-                    {/*    </Grid>*/}
-                    {/*    <Grid item md={6} xs={6} className="vertical-center">*/}
-                    {/*        <TextField id="sessionId" variant="outlined" value={sessionId}*/}
-                    {/*                   onChange={(e) => setSessionId(e.target.value)}/>*/}
-                    {/*    </Grid>*/}
-                    {/*</Grid>*/}
-                    <Grid container item spacing={2} xs={12} md={12}>
+                <Grid container>
+                    <Grid container item spacing={1} xs={12} md={12}>
+                        <Grid item md={6} xs={6}>
+                            <h5>Session ID</h5>
+                        </Grid>
+                        <Grid item md={6} xs={6} className="vertical-center">
+                            {sessionId}
+                        </Grid>
+                    </Grid>
+                    <Grid container item spacing={1} xs={12} md={12}>
                         <Grid item md={6} xs={6}>
                             <h5>Your Name</h5>
                         </Grid>
