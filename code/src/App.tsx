@@ -18,12 +18,16 @@ function App() {
                     <div className="App">
                         <Logo/>
                         <div className="App-menu">
-                            <button onClick={() => console.log("Hehe")}>
-                                <Link to="/start">Start a Sesh</Link>
-                            </button>
-                            <button onClick={() => console.log("U have no friends")}>
-                                <Link to="/join">Join a Sesh</Link>
-                            </button>
+                            <Link to="/start">
+                                <button onClick={() => console.log("Hehe")}>
+                                    Start a Sesh
+                                </button>
+                            </Link>
+                            <Link to="/join">
+                                <button onClick={() => console.log("U have no friends")}>
+                                    <Link to="/join">Join a Sesh</Link>
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </Route>
