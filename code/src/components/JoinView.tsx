@@ -2,9 +2,9 @@ import React, {FormEvent, useState} from "react";
 import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 
-import './styles/JoinView.css'
+import '../styles/JoinView.css'
 
-export function JoinView() {
+export default function JoinView() {
     const [sessionId, setSessionId]: [string, (arg: string) => void] = useState("");
     const [username, setUsername]: [string, (arg: string) => void] = useState("");
 

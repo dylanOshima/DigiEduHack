@@ -6,9 +6,10 @@ import {
     Link
 } from "react-router-dom";
 
-import './styles/App.css';
+import '../styles/App.css';
 import {Logo} from "./Logo";
-import {JoinView} from "./JoinView";
+import JoinView from "./JoinView";
+import CreateView from "./CreateView";
 
 function App() {
     return (
@@ -32,7 +33,7 @@ function App() {
                     </div>
                 </Route>
                 <Route path="/start">
-                    <h1>Start Ma Dick</h1>
+                    <CreateView/>
                 </Route>
                 <Route path="/join">
                     <JoinView/>
