@@ -11,3 +11,7 @@
 
 ## Links
 * [Design](https://excalidraw.com/#room=7f2978a6f02e54ede2a7,woTkiNoCcUCfus4dmXSUEQ)
+
+## Commands
+1. Run backend server `npm run start-api` \
+2. Run frontend server `npm start`
