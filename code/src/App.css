@@ -11,10 +11,13 @@
 }
 
 .App-header {
-  background-color: #ffffff;
-  color: #444446;
+  /* background-color: #ffffff; */
+  /* color: #444446; */
+  color: #fff;
   border-radius: 10px;
-  padding: 0rem 1rem;
+  border: 1px solid white;
+  padding: 0.5rem 8rem;
+  margin-bottom: 3rem;
 }
 
 .App-menu button {
