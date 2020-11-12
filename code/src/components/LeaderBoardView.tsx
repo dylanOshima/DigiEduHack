@@ -90,7 +90,6 @@ export default function LeaderBoardView() {
             <MenuBar/>
             <Grid container item md={12} xs={6}>
                 <Grid container item md={6} xs={6}>
-                    Video Shit
                 </Grid>
                 <Grid container item md={6} xs={6} spacing={2} className="leaderboard-view">
                     <Paper elevation={0} className="summary-card">

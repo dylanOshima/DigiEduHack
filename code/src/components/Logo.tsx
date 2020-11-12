@@ -1,6 +1,6 @@
 import React from "react";
 
-import LogoPng from '../imgs/logo.png';
+import LogoPng from '../imgs/StudySeshLogo.png';
 
 export const Logo = () => (
     <header className="App-header">
