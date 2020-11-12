@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -21,14 +21,10 @@ function App() {
                         <Logo/>
                         <div className="App-menu">
                             <Link to="/start">
-                                <button onClick={() => console.log("Hehe")}>
-                                    Start a Sesh
-                                </button>
+                                <button>Start a Sesh</button>
                             </Link>
                             <Link to="/join">
-                                <button onClick={() => console.log("U have no friends")}>
-                                    <Link to="/join">Join a Sesh</Link>
-                                </button>
+                                <button>Join a Sesh</button>
                             </Link>
                         </div>
                     </div>
