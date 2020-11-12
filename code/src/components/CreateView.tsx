@@ -9,10 +9,14 @@ import '../styles/JoinView.css'
 export default function CreateView() {
     // const [studySet, setStudySet]: [string, (arg: string) => void] = useState("");
     const [username, setUsername]: [string, (arg: string) => void] = useState("");
+    const [sessionId, setSessionId]: [string, (arg: string) => void] = useState("")
 
     useEffect(() => {
+        console.log("post request");
         axios.post('/create-session', {})
-            .then(res => console.log(res))
+            .then(res =>{
+                console.log("complete")
+            })
             .catch(err => console.error(err))
     }, [])
 
