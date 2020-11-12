@@ -29,6 +29,12 @@ const MOCKgameState: gameStateType = {
             should revise", topics: ["Topic4", "Topic56", "Topic13"]},
     ],
     question_idx: 0,
+    answers: [
+        {user: "Marco", answer: "123", score: 1},
+        {user: "Vitto", answer: "12132113", score: 3},
+        {user: "Ramzy", answer: "1333", score: -1},
+    ],
+    currentUser: 'Lollo',
 }
 
 export default function GameView(props: any) {
