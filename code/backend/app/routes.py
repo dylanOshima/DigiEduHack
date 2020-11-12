@@ -1,6 +1,7 @@
 from app import app
+from time import time
 
 
-@app.route('/')
+@app.route('/time')
 def home():
-    return "Hello World"
+    return {'time': time()}
