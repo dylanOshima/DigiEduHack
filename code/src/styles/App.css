@@ -1,39 +1,50 @@
 .App {
-  text-align: center;
-  background-color: #4257b4;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    text-align: center;
+    background-color: #4257b4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-header {
-  /* background-color: #ffffff; */
-  /* color: #444446; */
-  color: #fff;
-  border-radius: 10px;
-  border: 1px solid white;
-  padding: 0.5rem 8rem;
-  margin-bottom: 3rem;
+    /* background-color: #ffffff; */
+    /* color: #444446; */
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 0.5rem 8rem;
+    margin-bottom: 3rem;
 }
 
 .App-menu button {
-  width: 20rem;
-  font-weight: 600;
-  padding: .75rem 2rem;
-  font-size: 1rem;
-  line-height: 1.375;
-  margin-top: 1.5rem;
-  display: block;
-  border-radius: 10px;
-  background-color: #45cecd;
-  border: none;
+    width: 20rem;
+    font-weight: 600;
+    padding: .75rem 2rem;
+    font-size: 1rem;
+    line-height: 1.375;
+    margin-top: 1.5rem;
+    display: block;
+    border-radius: 10px;
+    background-color: #45cecd;
+    border: none;
 }
 
 .App-menu button:hover {
-  background-color: #93feff;
-  cursor: pointer;
+    background-color: #93feff;
+    cursor: pointer;
+}
+
+
+.App-side-logo {
+    /* background-color: #ffffff; */
+    /* color: #444446; */
+    color: #fff;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 0.5rem 8rem;
+    margin-bottom: 3rem;
 }

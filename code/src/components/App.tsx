@@ -10,6 +10,7 @@ import '../styles/App.css';
 import {Logo} from "./Logo";
 import JoinView from "./JoinView";
 import CreateView from "./CreateView";
+import GameView from "./GameView";
 
 function App() {
     return (
@@ -37,6 +38,9 @@ function App() {
                 </Route>
                 <Route path="/join">
                     <JoinView/>
+                </Route>
+                <Route path="/session/:sessionId">
+                    <GameView id={"Ciao"} />
                 </Route>
             </Switch>
         </Router>
