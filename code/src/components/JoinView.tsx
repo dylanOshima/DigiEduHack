@@ -3,10 +3,11 @@ import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 
 import '../styles/JoinView.css'
+import {NavBar} from "./NavBar";
 
 export default function JoinView() {
-    const [sessionId, setSessionId]: [string, (arg: string) => void] = useState("");
-    const [username, setUsername]: [string, (arg: string) => void] = useState("");
+    const [sessionId, setSessionId] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -14,14 +15,15 @@ export default function JoinView() {
         console.log(username);
     }
     return (
-        <div className="App">
+        <Grid container className="App">
+            <NavBar/>
             <Logo/>
             <h3>Join a Sesh</h3>
             <form className="form-group" onSubmit={onSubmit} autoComplete="off">
                 <Grid container>
                     <Grid container item spacing={1} xs={12} md={12}>
                         <Grid item md={6} xs={6}>
-                            <h5>Sesh Number</h5>
+                            <h5>Session ID</h5>
                         </Grid>
                         <Grid item md={6} xs={6} className="vertical-center">
                             <TextField id="sessionId" variant="outlined" value={sessionId}
@@ -43,6 +45,6 @@ export default function JoinView() {
                 </Grid>
                 <Button/>
             </form>
-        </div>
+        </Grid>
     )
 }

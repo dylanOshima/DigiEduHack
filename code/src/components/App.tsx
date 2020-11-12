@@ -10,6 +10,8 @@ import '../styles/App.css';
 import {Logo} from "./Logo";
 import JoinView from "./JoinView";
 import CreateView from "./CreateView";
+import {NavBar} from "./NavBar";
+import LeaderBoardView from "./LeaderBoardView";
 import GameView from "./GameView";
 
 function App() {
@@ -18,9 +20,10 @@ function App() {
             <Switch>
                 <Route exact path="/">
                     <div className="App">
+                        <NavBar/>
                         <Logo/>
                         <div className="App-menu">
-                            <Link to="/start">
+                            <Link to="/create">
                                 <button>Start a Sesh</button>
                             </Link>
                             <Link to="/join">
@@ -29,11 +32,14 @@ function App() {
                         </div>
                     </div>
                 </Route>
-                <Route path="/start">
+                <Route path="/create">
                     <CreateView/>
                 </Route>
                 <Route path="/join">
                     <JoinView/>
+                </Route>
+                <Route path="/:sessionId/leaderboard">
+                    <LeaderBoardView />
                 </Route>
                 <Route path="/session/:sessionId">
                     <GameView id={"Ciao"} />
