@@ -35,4 +35,5 @@
 
 .App-menu button:hover {
   background-color: #93feff;
+  cursor: pointer;
 }
