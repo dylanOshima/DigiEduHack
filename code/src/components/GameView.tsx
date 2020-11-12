@@ -4,17 +4,12 @@ import { SideLogo } from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 
 import Game, { gameStateType, userType, questionType } from './GameLogic';
+import UserFeed, { userFeedProps } from './Userfeed';
 
 import placeholder from '../imgs/person-placeholder.svg';
 import crown from '../imgs/crown.svg';
 
 import '../styles/GameView.css'
-
-type userFeedProps = {
-    username: string,
-    score: number,
-    isWinner?: boolean,
-}
 
 const MOCKgameState: gameStateType = {
     users: [
@@ -36,26 +31,6 @@ const MOCKgameState: gameStateType = {
     question_idx: 0,
 }
 
-const UserFeed = ({ username, score, isWinner }: userFeedProps) => (
-    <div className="user-feed">
-        <h5 className="score">{`${score}pts`}</h5>
-        <div className="feed">
-            <img className="crown" src={crown}
-                style={{display: isWinner ? 'block' : 'none'}} alt="crown" />
-            <img className="feed" src={placeholder} alt={`${username}'s feed.`} />
-        </div>
-        <h5 className="username">{username}</h5>
-    </div>
-);
-
-const UserFeeds = ({users}: {users: userFeedProps[]}) => (
-    <div className="user-feeds">
-        {users.map((user: userType) => (
-            <UserFeed {...user} isWinner={user.score === 700}/>
-        ))}
-    </div>
-);
-
 export default function GameView(props: any) {
     let params: any = useParams();
     const sessionId: string = params.sessionId;
@@ -69,7 +44,7 @@ export default function GameView(props: any) {
         <div className="App">
             <SideLogo/>
             <Game {...MOCKgameState} />
-            <UserFeeds users={MOCKgameState.users} />
+            <UserFeed users={MOCKgameState.users} />
         </div>
     )
 }

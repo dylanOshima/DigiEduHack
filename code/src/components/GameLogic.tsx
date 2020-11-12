@@ -51,7 +51,7 @@ export default function GameLogic(props: gameStateType) {
     }
 
     return (
-        <div className="Game">
+        <div className="Game w3-center">
             <Question questionText={questions[question_idx].text} />
             <Answer onSubmit={onSubmit} />
         </div>

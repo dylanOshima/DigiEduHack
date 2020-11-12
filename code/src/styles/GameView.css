@@ -1,15 +1,28 @@
+.Game {
+    margin: auto;
+    margin-top: 8rem;
+}
+
 .question {
     width: 70%;
     border: 1px solid white;
     padding: 0.5rem 2rem;
-    margin-bottom: 3rem;
     border-radius: 10px;
+    margin: 0 auto;
+    margin-bottom: 3rem;
     color: #fff;
 }
+
+.question h1 {
+    font-family: 'Indie Flower', cursive;
+}
+
 
 .answer {
     width: 70%;
     display: flex;
+    margin: auto;
+    margin-bottom: 3rem;
     align-items: center;
 }
 
@@ -34,53 +47,4 @@
     border-radius: 10px;
     background-color: #45cecd;
     border: none;
-}
-
-.user-feeds {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.user-feed {
-    width: 200px;
-    height: 200px;
-    position: relative;
-}
-
-.user-feed img.feed {
-    border: 1px solid white;
-    border-radius: 10px;
-}
-
-.user-feed .crown {
-    display: block;
-    width: 100px;
-    position: absolute;
-    top: 20%;
-    left: 25%;
-}
-
-.submit {
-    display: inline-block !important;
-}
-
-.MuiOutlinedInput-input {
-    border: 1px solid white !important;
-    border-radius: 3px;
-    color: white !important;
-    text-align: center;
-}
-
-.score {
-
-}
-
-.feed {
-
-}
-
-.username {
-    margin: 0;
 }
