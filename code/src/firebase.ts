@@ -45,7 +45,6 @@ export const joinSession = (id: string, user: string) => {
     return (
         getGameData(id)
             .then((data: any) => {
-                console.log(data);
                 const { users } = data;
                 db.collection("sessions")
                     .doc(id)
@@ -53,3 +52,11 @@ export const joinSession = (id: string, user: string) => {
             })
     );
 };
+
+export const subscribe = (id: string, callback: (arg: any) => void) => (
+    db.collection("sessions").doc(id).onSnapshot((doc) => {
+        // var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+        // console.log(source, " data: ", doc.data());
+        callback(doc.data());
+    })
+);
