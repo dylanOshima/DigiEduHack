@@ -39,63 +39,21 @@ export const emptyGameData: LocalGameState = {
 
 export const mockAnsweredQuestions: AnsweredQuestion[] = [
     {
-        text: "Are you stupid in the nostril?",
-        topics: ["Stupidity", "Mandemship"],
-        answer: "Yes",
+        text: "When was America discovered? (Hint: not 1492)?",
+        topics: ["History", "America", "Contemporary"],
+        answer: "1492",
         correct: true
     },
     {
-        text: "Are you stupid in the bare motherfucking nostril?",
-        topics: ["Stupidity", "Mandemship"],
-        answer: "No",
+        text: "What is Big O notation?",
+        topics: ["Algorithms", "Informatics", "Run time analysis"],
+        answer: "A measure of complexity",
         correct: false
     },
     {
-        text: "Are you stupid?",
-        topics: ["Mandemship", "Retardedness"],
-        answer: "Yes",
+        text: "What is the capital of Macedonia",
+        topics: ["Geography", "Politics", "Europe"],
+        answer: "Skopje",
         correct: true
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Stupidity", "Mandemship"],
-        answer: "No",
-        correct: false
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Stupidity", "Retardedness"],
-        answer: "Yes",
-        correct: true
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Mandemship", "Mandemship"],
-        answer: "No",
-        correct: false
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Stupidity", "Retardedness"],
-        answer: "Yes",
-        correct: true
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Mandemship", "Mandemship"],
-        answer: "No",
-        correct: false
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Stupidity", "Retardedness"],
-        answer: "Yes",
-        correct: true
-    },
-    {
-        text: "Are you stupid?",
-        topics: ["Mandemship", "Retardedness"],
-        answer: "No",
-        correct: false
-    },
+    }
 ]

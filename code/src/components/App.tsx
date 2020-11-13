@@ -50,7 +50,7 @@ function App() {
                         <JoinView username={username} setUsername={setUsername} />
                     </Route>
                     <Route path="/session/:sessionId/leaderboard">
-                        <LeaderBoardView/>
+                        <LeaderBoardView username={username}/>
                     </Route>
                     <Route path="/session/:sessionId">
                         <GameView username={username} />

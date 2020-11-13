@@ -17,6 +17,7 @@ import {GameState, LocalGameState} from "../models/GameState";
 export default function GameView(props: any) {
     let params: any = useParams();
     const sessionId: string = params.sessionId;
+
     // @ts-ignore
     const {username} = props;
     console.log(username);
