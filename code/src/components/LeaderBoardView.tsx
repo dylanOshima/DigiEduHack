@@ -10,16 +10,30 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import "../styles/LeaderBoardView.css";
 import {User} from "../models/User";
 import {UserFeed} from "./Userfeed";
-import {mockAnsweredQuestions, mockGameState} from "../models/MockData";
+import {emptyGameData, mockAnsweredQuestions, mockGameState} from "../models/MockData";
+import {subscribe} from "../firebase";
+import {LocalGameState} from "../models/GameState";
 
 
-export default function LeaderBoardView() {
-    console.log('params: ', useParams());
+export default function LeaderBoardView(props: any) {
+    let params: any = useParams();
+    const sessionId: string = params.sessionId;
+
+    const {username} = props;
+    console.log(username);
 
     const [correctQuestions, setCorrectQuestions] = useState<AnsweredQuestion[]>([]);
     const [incorrectQuestions, setIncorrectQuestions] = useState<AnsweredQuestion[]>([]);
 
+    const [game, setGame] = useState<LocalGameState>({
+        ...emptyGameData,
+        currentUser: {username: username, score: 0},
+    });
+
     useEffect(() => {
+        subscribe(sessionId, (gameState) => {
+            setGame({...gameState, currentUser: {username: username, score: 0}})
+        });
         parseQuestions(mockAnsweredQuestions);
     }, [])
 
@@ -36,16 +50,20 @@ export default function LeaderBoardView() {
         setIncorrectQuestions(incorrect);
     }
 
+    console.log(game.users !== []);
+    console.log(mockGameState)
     return (
-        <Grid container className="App">
-            <MenuBar/>
-            <Grid container item md={12} xs={12}>
-                <LeaderBoard users={mockGameState.users}/>
-                <Grid container item md={6} xs={6} className="leaderboard-view">
-                    <SummaryCard correctQuestions={correctQuestions} incorrectQuestions={incorrectQuestions}/>
+        (game.users.length !== 0) ?
+            <Grid container className="App">
+                <MenuBar/>
+                <Grid container item md={12} xs={12}>
+                    <LeaderBoard users={game.users || mockGameState.users}/>
+                    <Grid container item md={6} xs={6} className="leaderboard-view">
+                        <SummaryCard correctQuestions={correctQuestions} incorrectQuestions={incorrectQuestions}/>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Grid>
+            </Grid> : null
+
     )
 }
 
@@ -61,20 +79,20 @@ const LeaderBoard = (props: LeaderBoardProps) => {
             <div>
                 <Grid container spacing={10}>
                     <Grid item md={12} xs={12} style={{marginLeft: "37%"}}>
-                        <UserFeed username={users[0].username} score={users[0].score}/>
+                        <UserFeed username={users[0].username} score={users[0].score} isWinner/>
                     </Grid>
-                    <Grid container item md={12} xs={12} style={{marginLeft: "10%", marginTop:"1em"}}>
+                    <Grid container item md={12} xs={12} style={{marginLeft: "10%", marginTop: "1em"}}>
                         <Grid item md={4} xs={4}>
                             <UserFeed username={users[1].username} score={users[1].score}/>
                         </Grid>
                         <Grid item md={4} xs={4}>
                             <UserFeed username={users[2].username} score={users[2].score}/>
                         </Grid>
-                        <Grid item md={4} xs={4}>
+                        {users[3] ? <Grid item md={4} xs={4}>
                             <UserFeed username={users[3].username} score={users[3].score}/>
-                        </Grid>
+                        </Grid> : null}
                     </Grid>
-                    <Grid item md={12} xs={12} className="App-menu" style={{marginLeft: "3%", marginTop:"4em"}}>
+                    <Grid item md={12} xs={12} className="App-menu" style={{marginLeft: "3%", marginTop: "4em"}}>
                         <Link to="/">
                             <button className="submit" type="submit"> Back Home</button>
                         </Link>
