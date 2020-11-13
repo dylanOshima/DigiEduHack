@@ -1,8 +1,10 @@
 import React, {FormEvent, useEffect, useState} from "react";
-
+import { useHistory } from 'react-router-dom';
 import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 import Loader from 'react-loader-spinner';
+
+import { createSession } from '../firebase';
 
 import '../styles/JoinView.css'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -14,22 +16,8 @@ export default function CreateView() {
     const [sessionId, setSessionId]= useState<string>("")
     const [error, setError] = useState<string>("")
 
-    useEffect(() => {
-        fetch('/create-session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        })
-            .then(res => res.json()).then(data => {
-            if (data.token) setSessionId(data.token)
-            else setError(data.message)
-        })
-            .catch(err => {
-                console.error(err);
-            })
-    }, [])
+    const history = useHistory();
+    useEffect(() => {createSession((id: any) => history.push(`/join/${id}`))}, []);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();

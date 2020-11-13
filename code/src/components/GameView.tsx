@@ -33,6 +33,7 @@ const MOCKgameState: gameStateType = {
         {user: "Marco", answer: "123", score: 1},
         {user: "Vitto", answer: "12132113", score: 3},
         {user: "Ramzy", answer: "1333", score: -1},
+        {user: "Lollo", answer: "1333", score: 0},
     ],
     currentUser: 'Lollo',
 }

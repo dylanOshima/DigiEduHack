@@ -1,9 +1,10 @@
+* {box-sizing: border-box;}
+
 .Game {
     margin: auto;
     margin-top: 8rem;
     width: 100%;
     display: flex;
-    margin: auto;
     justify-content: space-between;
     align-items: center;
 }
@@ -69,19 +70,61 @@
 
 
 .review {
-    width: 80%;
+    width: 90%;
     margin: auto;
     display: flex;
     justify-content: space-between;
 }
 
 .review .left {
-    width: 40%;
+    width: 50%;
+}
+
+.review .left .question {
+    width: 90%;
+    height: 100%;
 }
 
 .review .right {
-    width: 40%;
+    width: 50%;
 }
 
-.answer .score[pos=true] {color: green;}
-.answer .score[neg=true] {color: red;}
+.review .answer-row {
+    padding: 5px 10px;
+    margin: 30px 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.review .answer-row .answer-text {
+    font-family: 'Indie Flower', cursive;
+}
+
+
+.answer-row .score {float: left;}
+.answer-row .score[data-pos=true] {color: green;}
+.answer-row .score[data-neg=true] {color: red;}
+.answer-row button:focus {outline: none;}
+
+.answer-row .arrow-top {
+    width: 0;
+    height: 0;
+    margin-bottom: 7px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #DDCCCC;
+}
+
+.answer-row .arrow-btm {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #DDCCCC;
+    margin-left: -1px;
+}
+
+.answer-row .arrow-top[data-used=true] {border-bottom: 15px solid #FF6666;}
+.answer-row .arrow-btm[data-used=true] {border-top: 15px solid #66DD66;}
