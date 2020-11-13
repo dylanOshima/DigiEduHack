@@ -1,13 +1,15 @@
-import React, {FormEvent, useState} from "react";
+import React, {FormEvent, useContext, useState} from "react";
 import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 
 import '../styles/JoinView.css'
 import {NavBar} from "./NavBar";
+import {CurrentUser} from "./App";
 
 export default function JoinView() {
     const [sessionId, setSessionId] = useState<string>("");
-    const [username, setUsername] = useState<string>("");
+    // @ts-ignore
+    const {username, setUsername} = useContext(CurrentUser);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,7 +28,7 @@ export default function JoinView() {
                             <h4>Session ID</h4>
                         </Grid>
                         <Grid item md={6} xs={6} className="vertical-center answer">
-                            <input id="sessionId" type="text" className="card"
+                            <input id="sessionId" type="text" className="card" value={sessionId}
                                    onChange={(e) => setSessionId(e.target.value)}/>
                         </Grid>
                     </Grid>
@@ -35,7 +37,7 @@ export default function JoinView() {
                             <h4>Your Name</h4>
                         </Grid>
                         <Grid item md={6} xs={6} className="vertical-center answer">
-                            <input id="username" type="text" className="card"
+                            <input id="username" type="text" className="card" value={username}
                                    onChange={(e) => setUsername(e.target.value)}/>
                         </Grid>
                     </Grid>
