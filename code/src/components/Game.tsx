@@ -104,7 +104,7 @@ export default function Game(props: LocalGameState) {
 
     let ret;
 
-    if (!answers.some(({user, answer}) => user === currentUser)) {
+    if (!answers.some(({user, answer}) => user.username === currentUser.username)) {
         ret = <QuestionAnswer onSubmit={onSubmit} setAnswer={setAnswer} {...questions[questionIndex]} />
     }
 
