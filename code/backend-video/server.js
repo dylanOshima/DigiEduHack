@@ -6,9 +6,12 @@ const app = express();
 const PORT = 3000;
 const SignalServer = require('./lib/SignalServer');
 
-app.get('/', (req, res) => {
-  res.sendFile(express.static('../public'));
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
+
 // Adding in a express server to HTTPS to allow HTTPS
 const server = https.createServer(
   // {
@@ -28,4 +31,5 @@ signal.connect();
 
 server.listen(PORT, () => {
   console.log('\nListening on PORT: ', PORT);
+  console.log(`\nConnect to: http://localhost:${PORT}/`);
 });
