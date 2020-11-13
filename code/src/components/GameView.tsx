@@ -23,14 +23,12 @@ export default function GameView(props: any) {
     const [game, setGame] = useState<LocalGameState>({
         ...emptyGameData,
         currentUser: {username: username, score: 0},
-        users: [{username: username, score: 0}]
     });
 
     useEffect(() => {
         subscribe(sessionId, (gameState) => {
             setGame({...gameState, sessionID: sessionId})
-        })
-        console.log(game);
+        });
     }, [])
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -38,6 +36,7 @@ export default function GameView(props: any) {
         console.log(sessionId);
     }
 
+    console.log(game.users);
     return (
         <div className="App">
             <MenuBar/>

@@ -38,9 +38,10 @@ export const joinSession = (id: string, user: string) => (
     getGameData(id)
         .then((data: any) => {
             const {users} = data;
+            const newUser = {username: user, score: 0};
             db.collection("sessions")
                 .doc(id)
-                .update({users: [...users, user]})
+                .update({users: [...users, newUser]})
         })
 );
 
