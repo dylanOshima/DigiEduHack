@@ -9,14 +9,9 @@ export const mockGameState: LocalGameState = {
         {username: "Marco", score: 1000},
     ],
     questions: [
-        {text: "Very long question text that covers some topics and some stuff you\
-            should revise", topics: ["Topic1", "Topic2", "Topic4"]},
-        {text: "Another long question text that covers some topics and some stuff you\
-            should revise", topics: ["Topic2", "Topic6", "Topic8"]},
-        {text: "Q3 is a very long question text that covers some topics and some stuff you\
-            should revise", topics: ["Topic3", "Topic6", "Topic9"]},
-        {text: "Q4 is my favourite long question text that covers some topics and some stuff you\
-            should revise", topics: ["Topic4", "Topic56", "Topic13"]},
+        {text: "When was America discovered? (Hint: not 1492)", topics: ["History", "America", "Contemporary"]},
+        {text: "What is Big O notation?", topics: ["Algorithms", "Informatics", "Run time analysis"]},
+        {text: "What is the capital of Macedonia", topics: ["Geography", "Politics", "Europe"]},
     ],
     questionIndex: 0,
     answers: [

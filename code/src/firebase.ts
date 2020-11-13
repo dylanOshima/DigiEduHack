@@ -67,16 +67,31 @@ const voteAnswer = (id: string, answer: Answer, change: number) => (
     getGameData(id)
         .then((data: any) => {
             const n = data.answers.map((a: Answer) => {
-                if (a.user === answer.user) {
+                if (a.user.username === answer.user.username) {
                     return {...a, votes: a.votes + change};
                 }
                 return a;
             });
             db.collection("sessions")
                 .doc(id)
-                .update({answers: [...n]})
+                .update({answers: [...n]});
+            if (n.some(({votes}: any) => votes >= 3)) {
+            // if (n >= 3) {
+                nextQuestion(id);
+            }
         })
 );
 
 export const upvoteAnswer = (id: string, answer: Answer) => (voteAnswer(id, answer, 1));
 export const downvoteAnswer = (id: string, answer: Answer) => (voteAnswer(id, answer, -1));
+
+export const nextQuestion = (id: string) => (
+    getGameData(id)
+        .then((data: any) => {
+            const n = data.questionIndex
+            db.collection("sessions")
+                .doc(id)
+                .update({questionIndex: n+1, answers: []})
+        })
+);
+

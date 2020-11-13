@@ -1,8 +1,8 @@
 import {QuestionAnswerSharp} from "@material-ui/icons";
 import React, {FormEvent, useState} from "react";
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 
-import {answerQuestion} from '../firebase';
+import {answerQuestion, upvoteAnswer, downvoteAnswer} from '../firebase';
 
 import '../styles/GameView.css'
 import '../styles/App.css';
@@ -19,7 +19,7 @@ type answerProps = {
 const QuestionComponent = ({text, topics}: Question) => (
     <div className="card question">
         <h3 style={{marginBottom: "1em"}}>{text}</h3>
-        {topics.map((t) => (
+        {topics && topics.map((t) => (
             <span key={t} className="topic">{t}</span>
         ))}
     </div>
@@ -49,17 +49,20 @@ const QuestionAnswer = ({onSubmit, setAnswer, ...props}: any) => (
     </Grid>
 );
 
-const AnswerRow = ({votes, answer}: any) => {
+const AnswerRow = ({sessionID, ...a}: any) => {
+    const { answer, votes } = a;
     const [localScore, setLocalScore] = useState(0);
 
     const increase = () => {
         if (localScore < 1) {
-            setLocalScore(localScore + 1)
+            setLocalScore(localScore + 1);
+            upvoteAnswer(sessionID, a);
         }
     };
     const decrease = () => {
         if (localScore > -1) {
             setLocalScore(localScore - 1)
+            downvoteAnswer(sessionID, a);
         }
     };
 
@@ -79,13 +82,13 @@ const AnswerRow = ({votes, answer}: any) => {
     );
 };
 
-const ReviewAnswers = ({answers, ...props}: any) => (
+const ReviewAnswers = ({answers, sessionID, ...props}: any) => (
     <div className="review">
         <div className="left">
             <QuestionComponent {...props} />
         </div>
         <div className="right">
-            {answers.map((a: Answer) => (<AnswerRow {...a} />))}
+            {answers.map((a: Answer) => (<AnswerRow key={a.user.username} sessionID={sessionID} {...a} />))}
         </div>
     </div>
 );
@@ -94,6 +97,7 @@ export default function Game(props: LocalGameState) {
     const {answers, questions, questionIndex, currentUser, sessionID} = props;
 
     const [answer, setAnswer] = useState<string>("");
+    const history = useHistory();
 
     console.log({"ciao": "ciao"}, props);
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -103,14 +107,19 @@ export default function Game(props: LocalGameState) {
     }
 
     let ret;
+    console.log(questionIndex, questions.length);
 
-    if (!answers.some(({user, answer}) => user.username === currentUser.username)) {
+    if (questionIndex < questions.length && !answers.some(({user, answer}) => user.username === currentUser.username)) {
         ret = <QuestionAnswer onSubmit={onSubmit} setAnswer={setAnswer} {...questions[questionIndex]} />
     }
-
-    else if (true) {
-        ret = <ReviewAnswers answers={answers.sort((a, b) => (b.votes - a.votes))}
+    else if (questionIndex < questions.length) {
+        ret = <ReviewAnswers sessionID={sessionID}
+                answers={answers.sort((a, b) => (b.votes - a.votes))}
                              {...questions[questionIndex]} topics={[]}/>;
+    }
+
+    else {
+        history.push('leaderboard');
     }
 
     return (

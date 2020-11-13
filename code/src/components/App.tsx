@@ -43,16 +43,16 @@ function App() {
                             </Grid>
                         </div>
                     </Route>
-                    <Route exact path="/create">
+                    <Route path="/create">
                         <CreateView username={username} setUsername={setUsername} />
                     </Route>
-                    <Route exact path="/join">
+                    <Route path="/join">
                         <JoinView username={username} setUsername={setUsername} />
                     </Route>
-                    <Route exact path="/session/:sessionId/leaderboard">
+                    <Route path="/session/:sessionId/leaderboard">
                         <LeaderBoardView/>
                     </Route>
-                    <Route exact path="/session/:sessionId">
+                    <Route path="/session/:sessionId">
                         <GameView username={username} />
                     </Route>
                     <Route exact path="/mock">
