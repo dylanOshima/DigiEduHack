@@ -23,10 +23,11 @@ export const UserFeed = ({ username, score, isWinner }: userFeedProps) => (
 );
 
 export default function UserFeeds({users}: {users: userFeedProps[]}) {
+    const winner = users.sort((a, b) => (b.score - a.score))[0];
     return (
         <div className="user-feeds">
             {users.map((user: userFeedProps) => (
-                <UserFeed key={user.username} {...user} isWinner={user.score === 700}/>
+                <UserFeed key={user.username} {...user} isWinner={user.username === winner.username}/>
             ))}
         </div>
     );
