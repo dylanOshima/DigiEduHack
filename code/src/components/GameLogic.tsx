@@ -3,6 +3,8 @@ import React, {FormEvent, useState} from "react";
 import { useParams } from 'react-router-dom';
 
 import '../styles/GameView.css'
+import {GameState} from "../models/GameState";
+import {Question} from "../models/Question";
 
 type questionProps = {
     questionText: string,
@@ -36,7 +38,7 @@ export type gameStateType = {
     currentUser: string,
 }
 
-const Question = ({text, topics}: questionType) => (
+const QuestionComponent = ({text, topics}: Question) => (
     <div className="card question">
         <h3>{text}</h3>
         {topics.map((t) => (
@@ -56,7 +58,7 @@ const Answer = ({onSubmit}: answerProps) => (
 
 const QuestionAnswer = ({ onSubmit, ...props }: any) => (
     <>
-        <Question {...props} />
+        <QuestionComponent {...props} />
         <Answer onSubmit={onSubmit} />
     </>
 );
@@ -96,8 +98,8 @@ const ReviewAnswers = ({ answers, ...props }: any) => (
     </div>
 );
 
-export default function GameLogic(props: gameStateType) {
-    const { answers, questions, question_idx, currentUser } = props;
+export default function GameLogic(props: GameState) {
+    const { answers, questions, questionIndex, currentUser } = props;
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -106,9 +108,8 @@ export default function GameLogic(props: gameStateType) {
 
     let ret;
 
-    // if (false) {
     if (!answers.some(({ user, answer }) => user === currentUser)) {
-        ret = <QuestionAnswer onSubmit={onSubmit} {...questions[question_idx]} />
+        ret = <QuestionAnswer onSubmit={onSubmit} {...questions[questionIndex]} />
     }
 
     if (true) {
@@ -119,6 +120,8 @@ export default function GameLogic(props: gameStateType) {
     return (
         <div className="Game w3-center">
             {ret}
+            <QuestionComponent text={questions[questionIndex].text} topics={['shit', 'shitter']}/>
+            <Answer onSubmit={onSubmit} />
         </div>
     )
 }

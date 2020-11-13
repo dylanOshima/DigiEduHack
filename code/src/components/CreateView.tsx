@@ -31,9 +31,9 @@ export default function CreateView() {
                 <h3>{error}</h3> :
                 sessionId ?
                     <React.Fragment>
-                        <h3>Start a new Sesh</h3>
+                        <h3 style={{marginBottom: "2em"}}>Start a new Sesh</h3>
                         <form className="form-group" onSubmit={onSubmit} autoComplete="off">
-                            <Grid container>
+                            <Grid container spacing={2}>
                                 <Grid container item spacing={1} xs={12} md={12}>
                                     <Grid item md={6} xs={6}>
                                         <h5>Session ID</h5>
@@ -43,7 +43,7 @@ export default function CreateView() {
                                     </Grid>
                                 </Grid>
                                 <Grid container item spacing={1} xs={12} md={12}>
-                                    <Grid item md={6} xs={6}>
+                                    <Grid item md={6} xs={6} className="vertical-center">
                                         <h5>Your Name</h5>
                                     </Grid>
                                     <Grid item md={6} xs={6} className="vertical-center">

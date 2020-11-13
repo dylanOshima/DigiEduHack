@@ -18,11 +18,11 @@ export default function JoinView() {
         <Grid container className="App">
             <NavBar/>
             <Logo/>
-            <h3>Join a Sesh</h3>
+            <h3 style={{marginBottom: "2em"}}>Join a Sesh</h3>
             <form className="form-group" onSubmit={onSubmit} autoComplete="off">
-                <Grid container>
+                <Grid container spacing={2}>
                     <Grid container item spacing={1} xs={12} md={12}>
-                        <Grid item md={6} xs={6}>
+                        <Grid item md={6} xs={6} className="vertical-center">
                             <h5>Session ID</h5>
                         </Grid>
                         <Grid item md={6} xs={6} className="vertical-center">
@@ -31,7 +31,7 @@ export default function JoinView() {
                         </Grid>
                     </Grid>
                     <Grid container item spacing={1} xs={12} md={12}>
-                        <Grid item md={6} xs={6}>
+                        <Grid item md={6} xs={6} className="vertical-center">
                             <h5>Your Name</h5>
                         </Grid>
                         <Grid item md={6} xs={6} className="vertical-center">

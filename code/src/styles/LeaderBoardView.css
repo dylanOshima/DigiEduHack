@@ -1,11 +1,15 @@
 .answer-card {
     margin: 0.3em 1em;
-    background-color: #93feff !important;
+    background-color: #45cecd !important;
     padding: 0.5em;
 }
 
 .summary-card {
-    margin: 1em;
     padding: 1em;
-    margin-top: 10vh;
+    margin: 10vh 1em 1em;
+}
+
+.leaderboard-card {
+    padding: 1em;
+    margin: 15vh 1em 1em !important;
 }

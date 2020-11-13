@@ -4,14 +4,13 @@ import placeholder from '../imgs/person-placeholder.svg';
 import crown from '../imgs/crown.svg';
 
 import '../styles/Userfeed.css'
+import {User} from "../models/User";
 
-export type userFeedProps = {
-  username: string,
-  score: number,
+export interface userFeedProps extends User {
   isWinner?: boolean,
 }
 
-const UserFeed = ({ username, score, isWinner }: userFeedProps) => (
+export const UserFeed = ({ username, score, isWinner }: userFeedProps) => (
   <div className="user-feed">
       <h5 className="score">{`${score}pts`}</h5>
       <div className="feed">
