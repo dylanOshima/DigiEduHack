@@ -11,9 +11,8 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import {NavBar} from "./NavBar";
 import {CurrentUser} from "./App";
 
-export default function CreateView() {
+export default function CreateView({username, setUsername}: any) {
     // @ts-ignore
-    const {username, setUsername} = useContext(CurrentUser);
     const [sessionId, setSessionId] = useState<string>("")
     const [error, setError] = useState<string>("")
 
@@ -24,6 +23,7 @@ export default function CreateView() {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log(username);
         joinSession(sessionId, username).then(() => history.push(`/session/${sessionId}`));
     }
 

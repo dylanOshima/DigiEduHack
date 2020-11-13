@@ -15,7 +15,7 @@ export const createSession = () => {
     const ID = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
     return db.collection("sessions")
         .doc(ID)
-        .set(emptyGameData)
+        .set({ ...emptyGameData, sessionID: ID })
         .then(() => {
             return (ID);
         })

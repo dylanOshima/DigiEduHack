@@ -20,9 +20,9 @@ import {Grid} from "@material-ui/core";
 export const CurrentUser = React.createContext({});
 
 function App() {
-    const [username, setUsername] = useState<string>("");
+    const [username, setUsername] = useState("");
     return (
-        <CurrentUser.Provider value={{username: username, setUsername: setUsername}}>
+        <CurrentUser.Provider value={{username, setUsername }}>
             <Router>
                 <Switch>
                     <Route exact path="/">
@@ -44,7 +44,7 @@ function App() {
                         </div>
                     </Route>
                     <Route exact path="/create">
-                        <CreateView/>
+                        <CreateView username={username} setUsername={setUsername} />
                     </Route>
                     <Route exact path="/join">
                         <JoinView/>
@@ -53,7 +53,7 @@ function App() {
                         <LeaderBoardView/>
                     </Route>
                     <Route exact path="/session/:sessionId">
-                        <GameView id={"Ciao"}/>
+                        <GameView username={username} />
                     </Route>
                     <Route exact path="/mock">
                         <Mock/>

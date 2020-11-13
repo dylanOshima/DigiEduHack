@@ -18,7 +18,7 @@ export default function GameView(props: any) {
     let params: any = useParams();
     const sessionId: string = params.sessionId;
     // @ts-ignore
-    const {username} = useContext(CurrentUser);
+    const {username} = props;
     console.log(username);
     const [game, setGame] = useState<LocalGameState>({
         ...emptyGameData,
@@ -27,7 +27,7 @@ export default function GameView(props: any) {
 
     useEffect(() => {
         subscribe(sessionId, (gameState) => {
-            setGame({...gameState, sessionID: sessionId})
+            setGame({...gameState, currentUser: {username: username, score: 0}})
         });
     }, [])
 

@@ -39,7 +39,7 @@ export const emptyGameData: LocalGameState = {
         username: "",
         score: 0
     },
-    sessionID: ""
+    sessionID: "",
 };
 
 export const mockAnsweredQuestions: AnsweredQuestion[] = [

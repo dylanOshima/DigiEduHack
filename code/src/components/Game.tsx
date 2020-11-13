@@ -2,6 +2,8 @@ import {QuestionAnswerSharp} from "@material-ui/icons";
 import React, {FormEvent, useState} from "react";
 import {useParams} from 'react-router-dom';
 
+import {answerQuestion} from '../firebase';
+
 import '../styles/GameView.css'
 import '../styles/App.css';
 
@@ -11,6 +13,7 @@ import {Grid} from "@material-ui/core";
 
 type answerProps = {
     onSubmit: any,
+    setAnswer: any,
 };
 
 const QuestionComponent = ({text, topics}: Question) => (
@@ -22,27 +25,26 @@ const QuestionComponent = ({text, topics}: Question) => (
     </div>
 );
 
-const AnswerComponent = ({onSubmit}: answerProps) => (
+const AnswerComponent = ({onSubmit, setAnswer}: answerProps) => (
     <Grid container className="answer">
         <Grid item md={8} xs={8}>
             <input type="text" id="answer" className="card"
                    placeholder="Write your answer here!"
-                   onChange={(e) => {
-                   }}/>
+                   onChange={(e) => {setAnswer(e.target.value)}}/>
         </Grid>
         <Grid item md={4} xs={4}>
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={onSubmit}>Submit</button>
         </Grid>
     </Grid>
 );
 
-const QuestionAnswer = ({onSubmit, ...props}: any) => (
+const QuestionAnswer = ({onSubmit, setAnswer, ...props}: any) => (
     <Grid container>
         <Grid item container>
             <QuestionComponent {...props} />
         </Grid>
         <Grid item container>
-            <AnswerComponent onSubmit={onSubmit}/>
+            <AnswerComponent setAnswer={setAnswer} onSubmit={onSubmit}/>
         </Grid>
     </Grid>
 );
@@ -89,22 +91,24 @@ const ReviewAnswers = ({answers, ...props}: any) => (
 );
 
 export default function Game(props: LocalGameState) {
-    const {answers, questions, questionIndex, currentUser} = props;
+    const {answers, questions, questionIndex, currentUser, sessionID} = props;
 
     const [answer, setAnswer] = useState<string>("");
 
+    console.log({"ciao": "ciao"}, props);
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log();
+        console.log(answer);
+        answerQuestion(sessionID, {user: currentUser, answer, votes: 0});
     }
 
     let ret;
 
     if (!answers.some(({user, answer}) => user === currentUser)) {
-        ret = <QuestionAnswer onSubmit={onSubmit} {...questions[questionIndex]} />
+        ret = <QuestionAnswer onSubmit={onSubmit} setAnswer={setAnswer} {...questions[questionIndex]} />
     }
 
-    if (false) {
+    else if (true) {
         ret = <ReviewAnswers answers={answers.sort((a, b) => (b.votes - a.votes))}
                              {...questions[questionIndex]} topics={[]}/>;
     }
