@@ -18,7 +18,7 @@ class RTCMesh extends Component {
       iceServers: iceServerURLs || DEFAULT_ICE_SERVERS,
       mediaConstraints: mediaConstraints || DEFAULT_CONSTRAINTS,
       localMediaStream: null,
-      remoteMediaStream: null,
+      remoteMediaStreams: [],
       roomKey: null,
       socketID: null,
       connectionStarted: false,
@@ -93,7 +93,10 @@ class RTCMesh extends Component {
   }
 
   addRemoteStream = (remoteMediaStream) => {
-    this.setState({ remoteMediaStream });
+    this.setState({ remoteMediaStreams: [
+      ...this.state.remoteMediaStreams,
+      remoteMediaStream
+    ] });
   }
 
   handleSubmit = (event) => {
@@ -117,7 +120,7 @@ class RTCMesh extends Component {
   render() {
     const { 
       localMediaStream,
-      remoteMediaStream,
+      remoteMediaStreams,
       text,
       roomKey,
       socketID,
@@ -147,10 +150,9 @@ class RTCMesh extends Component {
           roomInfo={{ socketID, roomKey }}
         />
         <RTCVideo mediaStream={localMediaStream} />
-        <RTCVideo mediaStream={remoteMediaStream} />
-        <RTCVideo mediaStream={remoteMediaStream} />
-        <RTCVideo mediaStream={remoteMediaStream} />
-
+        <RTCVideo mediaStream={remoteMediaStreams[0]}  />
+        <RTCVideo mediaStream={remoteMediaStreams[1]}  />
+        <RTCVideo mediaStream={remoteMediaStreams[2]}  />
         <section className='button-container'>
           { localMediaStream == null
             ? <button className='button button--start-color' onClick={this.openCamera}>
