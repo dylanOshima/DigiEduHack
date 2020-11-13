@@ -35,7 +35,7 @@ const QuestionAnswer = ({ onSubmit, ...props }: any) => (
     </>
 );
 
-const AnswerRow = ({score, answer}: any) => {
+const AnswerRow = ({votes, answer}: any) => {
     const [localScore, setLocalScore] = useState(0);
 
     const increase = () => {if (localScore < 1) {setLocalScore(localScore + 1)}};
@@ -43,8 +43,8 @@ const AnswerRow = ({score, answer}: any) => {
 
     return (
         <h3 className="card answer-row">
-            <span className="score" data-pos={score > 0} data-neg={score < 0}>
-                {score > 0 ? `+${score}` : score}
+            <span className="score" data-pos={votes > 0} data-neg={votes < 0}>
+                {votes > 0 ? `+${votes}` : votes}
             </span>
             <span className="answer-text">{answer}</span>
             <div className="voter">
@@ -63,15 +63,7 @@ const ReviewAnswers = ({ answers, ...props }: any) => (
             <QuestionComponent {...props} />
         </div>
         <div className="card right">
-            {answers.map(({answer, votes}: Answer) => (
-                <div className="card answer">
-                    <span className="score" >
-                        {votes > 0 ? `+${votes}` : votes}
-                    </span>
-                    <span className="answer">{answer}</span>
-                    <div className="voter"></div>
-                </div>
-            ))}
+            {answers.map((a: Answer) => (<AnswerRow {...a} />))}
         </div>
     </div>
 );
