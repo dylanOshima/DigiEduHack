@@ -12,7 +12,7 @@ export interface userFeedProps extends User {
 
 export const UserFeed = ({ username, score, isWinner }: userFeedProps) => (
   <div className="user-feed">
-      <h5 className="score">{`${score}pts`}</h5>
+      <h4 className="score" style={{marginBottom: "1.5em"}}>{`${score}pts`}</h4>
       <div className="feed">
           <img className="crown" src={crown}
               style={{display: isWinner ? 'block' : 'none'}} alt="crown" />
