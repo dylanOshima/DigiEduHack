@@ -119,7 +119,7 @@ export default function Game(props: LocalGameState) {
     }
 
     else {
-        history.push('leaderboard');
+        history.push(`/session/${sessionID}/leaderboard`);
     }
 
     return (
