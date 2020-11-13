@@ -9,10 +9,9 @@ import '../styles/JoinView.css'
 import {NavBar} from "./NavBar";
 import {CurrentUser} from "./App";
 
-export default function JoinView() {
+export default function JoinView({ username, setUsername }: any) {
     const [sessionId, setSessionId] = useState<string>("");
     // @ts-ignore
-    const {username, setUsername} = useContext(CurrentUser);
     const history = useHistory();
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {

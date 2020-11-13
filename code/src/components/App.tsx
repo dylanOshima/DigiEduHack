@@ -47,7 +47,7 @@ function App() {
                         <CreateView username={username} setUsername={setUsername} />
                     </Route>
                     <Route exact path="/join">
-                        <JoinView/>
+                        <JoinView username={username} setUsername={setUsername} />
                     </Route>
                     <Route exact path="/session/:sessionId/leaderboard">
                         <LeaderBoardView/>
