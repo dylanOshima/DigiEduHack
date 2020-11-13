@@ -14,6 +14,7 @@ import {NavBar} from "./NavBar";
 import LeaderBoardView from "./LeaderBoardView";
 import GameView from "./GameView";
 import Video from "./Video";
+import {Grid} from "@material-ui/core";
 
 function App() {
     return (
@@ -23,14 +24,18 @@ function App() {
                     <div className="App">
                         <NavBar/>
                         <Logo/>
-                        <div className="App-menu">
-                            <Link to="/create">
-                                <button>Start a Sesh</button>
-                            </Link>
-                            <Link to="/join">
-                                <button>Join a Sesh</button>
-                            </Link>
-                        </div>
+                        <Grid container spacing={3}className="App-menu">
+                            <Grid item md={12} xs={12}>
+                                <Link to="/create">
+                                    <button className="submit" type="submit">Start a Sesh</button>
+                                </Link>
+                            </Grid>
+                            <Grid item md={12} xs={12}>
+                                <Link to="/join">
+                                    <button className="submit" type="submit">Join a Sesh</button>
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </div>
                 </Route>
                 <Route exact path="/create">
@@ -40,13 +45,13 @@ function App() {
                     <JoinView/>
                 </Route>
                 <Route exact path="/session/:sessionId/leaderboard">
-                    <LeaderBoardView />
+                    <LeaderBoardView/>
                 </Route>
                 <Route exact path="/session/:sessionId">
-                    <GameView id={"Ciao"} />
+                    <GameView id={"Ciao"}/>
                 </Route>
                 <Route exact path="/test/video/">
-                    <Video />
+                    <Video/>
                 </Route>
             </Switch>
         </Router>

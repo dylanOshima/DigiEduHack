@@ -23,6 +23,7 @@ export const mockGameState: GameState = {
         {user: {username: "Marco", score: 1000}, answer: "123", votes: 1},
         {user: {username: "Vitto", score: 120}, answer: "12132113", votes: 3},
         {user: {username: "Ramzy", score: 10}, answer: "1333", votes: -1},
+        {user: {username: "Dylan", score: 700}, answer: "3", votes: 6}
     ],
     currentUser: {username: 'Lollo', score: 100},
 }

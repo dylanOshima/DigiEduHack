@@ -5,8 +5,10 @@ import { SideLogo } from "./Logo";
 import Game from './GameLogic';
 import UserFeed, { userFeedProps } from './Userfeed';
 
-import '../styles/GameView.css'
+import '../styles/GameView.css';
+
 import {mockGameState} from "../models/MockData";
+import {MenuBar} from "./MenuBar";
 
 export default function GameView(props: any) {
     let params: any = useParams();
@@ -19,7 +21,7 @@ export default function GameView(props: any) {
 
     return (
         <div className="App">
-            <SideLogo/>
+            <MenuBar/>
             <Game {...mockGameState} />
             <UserFeed users={mockGameState.users} />
         </div>
