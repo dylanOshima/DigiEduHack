@@ -46,9 +46,10 @@ export const joinSession = (id: string, user: string) => (
     getGameData(id)
         .then((data: any) => {
             const { users } = data;
+            const newUser = {username: user, score: 0};
             db.collection("sessions")
                 .doc(id)
-                .update({ users: [...users, user]})
+                .update({ users: [...users, newUser]})
         })
 );
 
@@ -85,3 +86,13 @@ const voteAnswer = (id: string, answer: Answer, change: number) => (
 
 export const upvoteAnswer = (id: string, answer: Answer) => (voteAnswer(id, answer, 1));
 export const downvoteAnswer = (id: string, answer: Answer) => (voteAnswer(id, answer, -1));
+
+export const nextQuestion = (id: string) => (
+    getGameData(id)
+        .then((data: any) => {
+            const { currentQuestion } = data;
+            db.collection("sessions")
+                .doc(id)
+                .update({ currentQuestion: currentQuestion+1 })
+        })
+);
