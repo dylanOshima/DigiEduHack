@@ -7,6 +7,7 @@ export interface GameState {
     answeredQuestions?: AnsweredQuestion[];
     questionIndex: number;
     answers: Answer[];
+    sessionID: string;
 }
 
 export interface LocalGameState extends GameState {

@@ -24,8 +24,6 @@ export default function CreateView() {
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const CurrentUser = React.createContext(username);
-        console.log(username);
         joinSession(sessionId, username).then(() => history.push(`/session/${sessionId}`));
     }
 

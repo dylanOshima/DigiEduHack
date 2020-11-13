@@ -1,4 +1,4 @@
-import {LocalGameState} from "./GameState";
+import {GameState, LocalGameState} from "./GameState";
 import {AnsweredQuestion} from "./Question";
 
 export const mockGameState: LocalGameState = {
@@ -26,7 +26,21 @@ export const mockGameState: LocalGameState = {
         {user: {username: "Dylan", score: 700}, answer: "3", votes: 6}
     ],
     currentUser: {username: 'Lollo', score: 100},
+    sessionID: "f2e123r1"
 }
+
+export const emptyGameData: LocalGameState = {
+    users: [],
+    questions: mockGameState.questions,
+    answeredQuestions: [],
+    questionIndex: 0,
+    answers: [],
+    currentUser: {
+        username: "",
+        score: 0
+    },
+    sessionID: ""
+};
 
 export const mockAnsweredQuestions: AnsweredQuestion[] = [
     {

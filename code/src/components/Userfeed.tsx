@@ -26,7 +26,7 @@ export default function UserFeeds({users}: {users: userFeedProps[]}) {
     return (
         <div className="user-feeds">
             {users.map((user: userFeedProps) => (
-                <UserFeed {...user} isWinner={user.score === 700}/>
+                <UserFeed key={user.username} {...user} isWinner={user.score === 700}/>
             ))}
         </div>
     );

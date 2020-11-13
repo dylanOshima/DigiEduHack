@@ -1,23 +1,15 @@
 import firebase from 'firebase';
 
-import { firebaseConfig } from './fbconfig';
+import {firebaseConfig} from './fbconfig';
 
-import { GameState } from "./models/GameState";
-import { Answer } from "./models/Question";
-import { mockGameState } from "./models/MockData";
+import {GameState} from "./models/GameState";
+import {Answer} from "./models/Question";
+import {emptyGameData} from "./models/MockData";
 
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
-
-const emptyGameData: GameState = {
-    users: [],
-    questions: mockGameState.questions,
-    answeredQuestions: [],
-    questionIndex: 0,
-    answers: [],
-};
 
 export const createSession = () => {
     const ID = Math.random().toString(36).substring(2, 6) + Math.random().toString(36).substring(2, 6);
@@ -45,11 +37,10 @@ export const getGameData = (id: string) => (
 export const joinSession = (id: string, user: string) => (
     getGameData(id)
         .then((data: any) => {
-            const { users } = data;
-            const newUser = {username: user, score: 0};
+            const {users} = data;
             db.collection("sessions")
                 .doc(id)
-                .update({ users: [...users, newUser]})
+                .update({users: [...users, user]})
         })
 );
 
@@ -64,10 +55,10 @@ export const subscribe = (id: string, callback: (arg: any) => void) => (
 export const answerQuestion = (id: string, answer: Answer) => (
     getGameData(id)
         .then((data: any) => {
-            const { answers } = data;
+            const {answers} = data;
             db.collection("sessions")
                 .doc(id)
-                .update({ answers: [...answers, answer]})
+                .update({answers: [...answers, answer]})
         })
 );
 
@@ -75,24 +66,16 @@ const voteAnswer = (id: string, answer: Answer, change: number) => (
     getGameData(id)
         .then((data: any) => {
             const n = data.answers.map((a: Answer) => {
-                if (a.user === answer.user) { return {...a, votes: a.votes+change}; }
+                if (a.user === answer.user) {
+                    return {...a, votes: a.votes + change};
+                }
                 return a;
             });
             db.collection("sessions")
                 .doc(id)
-                .update({ answers: [...n]})
+                .update({answers: [...n]})
         })
 );
 
 export const upvoteAnswer = (id: string, answer: Answer) => (voteAnswer(id, answer, 1));
 export const downvoteAnswer = (id: string, answer: Answer) => (voteAnswer(id, answer, -1));
-
-export const nextQuestion = (id: string) => (
-    getGameData(id)
-        .then((data: any) => {
-            const { currentQuestion } = data;
-            db.collection("sessions")
-                .doc(id)
-                .update({ currentQuestion: currentQuestion+1 })
-        })
-);

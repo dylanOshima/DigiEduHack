@@ -17,7 +17,7 @@ const QuestionComponent = ({text, topics}: Question) => (
     <div className="card question">
         <h3 style={{marginBottom: "1em"}}>{text}</h3>
         {topics.map((t) => (
-            <span className="topic">{t}</span>
+            <span key={t} className="topic">{t}</span>
         ))}
     </div>
 );
@@ -88,8 +88,10 @@ const ReviewAnswers = ({answers, ...props}: any) => (
     </div>
 );
 
-export default function GameLogic(props: LocalGameState) {
+export default function Game(props: LocalGameState) {
     const {answers, questions, questionIndex, currentUser} = props;
+
+    const [answer, setAnswer] = useState<string>("");
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -102,8 +104,7 @@ export default function GameLogic(props: LocalGameState) {
         ret = <QuestionAnswer onSubmit={onSubmit} {...questions[questionIndex]} />
     }
 
-    if (true
-    ) {
+    if (false) {
         ret = <ReviewAnswers answers={answers.sort((a, b) => (b.votes - a.votes))}
                              {...questions[questionIndex]} topics={[]}/>;
     }
