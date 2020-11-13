@@ -4,7 +4,7 @@ import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 import Loader from 'react-loader-spinner';
 
-// import { createSession } from '../firebase';
+import { createSession } from '../firebase';
 
 import '../styles/JoinView.css'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
@@ -17,11 +17,12 @@ export default function CreateView() {
     const [error, setError] = useState<string>("")
 
     const history = useHistory();
-    // useEffect(() => {createSession((id: any) => history.push(`/join/${id}`))}, []);
+    useEffect(() => {createSession().then((id) => history.push(`/join/${id}`))}, []);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(username);
+        // createSession((id: any) => history.push(`/join/${id}`));
     }
     return (
         <Grid container className="App">
