@@ -5,7 +5,7 @@ import {useParams} from 'react-router-dom';
 import '../styles/GameView.css'
 import '../styles/App.css';
 
-import {GameState} from "../models/GameState";
+import {LocalGameState} from "../models/GameState";
 import {Answer, Question} from "../models/Question";
 import {Grid} from "@material-ui/core";
 
@@ -88,7 +88,7 @@ const ReviewAnswers = ({answers, ...props}: any) => (
     </div>
 );
 
-export default function GameLogic(props: GameState) {
+export default function GameLogic(props: LocalGameState) {
     const {answers, questions, questionIndex, currentUser} = props;
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {

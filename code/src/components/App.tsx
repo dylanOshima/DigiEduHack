@@ -14,6 +14,7 @@ import {NavBar} from "./NavBar";
 import LeaderBoardView from "./LeaderBoardView";
 import GameView from "./GameView";
 import Video from "./Video";
+import Mock from "./Mock";
 import {Grid} from "@material-ui/core";
 
 function App() {
@@ -49,6 +50,9 @@ function App() {
                 </Route>
                 <Route exact path="/session/:sessionId">
                     <GameView id={"Ciao"}/>
+                </Route>
+                <Route exact path="/mock">
+                    <Mock/>
                 </Route>
                 <Route exact path="/test/video/">
                     <Video/>

@@ -1,7 +1,7 @@
-import {GameState} from "./GameState";
+import {LocalGameState} from "./GameState";
 import {AnsweredQuestion} from "./Question";
 
-export const mockGameState: GameState = {
+export const mockGameState: LocalGameState = {
      users: [
         {username: "Vitto", score: 120},
         {username: "Dylan", score: 700},
