@@ -5,7 +5,6 @@ import { SideLogo } from "./Logo";
 import Game from './GameLogic';
 import UserFeed, { userFeedProps } from './Userfeed';
 
-
 import '../styles/GameView.css'
 import {mockGameState} from "../models/MockData";
 

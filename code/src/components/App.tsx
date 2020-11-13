@@ -33,19 +33,19 @@ function App() {
                         </div>
                     </div>
                 </Route>
-                <Route path="/create">
+                <Route exact path="/create">
                     <CreateView/>
                 </Route>
-                <Route path="/join">
+                <Route exact path="/join">
                     <JoinView/>
                 </Route>
-                <Route path="/:sessionId/leaderboard">
+                <Route exact path="/session/:sessionId/leaderboard">
                     <LeaderBoardView />
                 </Route>
-                <Route path="/session/:sessionId">
+                <Route exact path="/session/:sessionId">
                     <GameView id={"Ciao"} />
                 </Route>
-                <Route path="/test/video/">
+                <Route exact path="/test/video/">
                     <Video />
                 </Route>
             </Switch>

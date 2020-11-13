@@ -4,39 +4,11 @@ import { useParams } from 'react-router-dom';
 
 import '../styles/GameView.css'
 import {GameState} from "../models/GameState";
-import {Question} from "../models/Question";
-
-type questionProps = {
-    questionText: string,
-}
+import {Answer, Question} from "../models/Question";
 
 type answerProps = {
     onSubmit: any,
 };
-
-export type userType = {
-    username: string,
-    score: number,
-}
-
-export type questionType = {
-    text: string,
-    topics: string[],
-}
-
-export type answerType = {
-    user: string,
-    answer: string,
-    score: number,
-}
-
-export type gameStateType = {
-    users: userType[],
-    questions: questionType[],
-    question_idx: number,
-    answers: answerType[],
-    currentUser: string,
-}
 
 const QuestionComponent = ({text, topics}: Question) => (
     <div className="card question">
@@ -47,7 +19,7 @@ const QuestionComponent = ({text, topics}: Question) => (
     </div>
 );
 
-const Answer = ({onSubmit}: answerProps) => (
+const AnswerComponent = ({onSubmit}: answerProps) => (
     <div className="answer">
         <input type="text" id="answer" className="card"
             placeholder="Write your answer here!"
@@ -59,7 +31,7 @@ const Answer = ({onSubmit}: answerProps) => (
 const QuestionAnswer = ({ onSubmit, ...props }: any) => (
     <>
         <QuestionComponent {...props} />
-        <Answer onSubmit={onSubmit} />
+        <AnswerComponent onSubmit={onSubmit} />
     </>
 );
 
@@ -87,12 +59,18 @@ const AnswerRow = ({score, answer}: any) => {
 
 const ReviewAnswers = ({ answers, ...props }: any) => (
     <div className="review">
-        <div className="left">
-            <Question {...props} />
+        <div className="card left">
+            <QuestionComponent {...props} />
         </div>
-        <div className="right">
-            {answers.map((a: answerType) => (
-                <AnswerRow {...a} />
+        <div className="card right">
+            {answers.map(({answer, votes}: Answer) => (
+                <div className="card answer">
+                    <span className="score" >
+                        {votes > 0 ? `+${votes}` : votes}
+                    </span>
+                    <span className="answer">{answer}</span>
+                    <div className="voter"></div>
+                </div>
             ))}
         </div>
     </div>
@@ -112,16 +90,14 @@ export default function GameLogic(props: GameState) {
         ret = <QuestionAnswer onSubmit={onSubmit} {...questions[questionIndex]} />
     }
 
-    if (true) {
-        ret = <ReviewAnswers answers={answers.sort((a, b) => (b.score - a.score))}
-            {...questions[question_idx]} topics={[]} />;
+    if (false) {
+        ret = <ReviewAnswers answers={answers.sort((a, b) => (b.votes - a.votes))}
+            {...questions[questionIndex]} topics={[]} />;
     }
 
     return (
         <div className="Game w3-center">
             {ret}
-            <QuestionComponent text={questions[questionIndex].text} topics={['shit', 'shitter']}/>
-            <Answer onSubmit={onSubmit} />
         </div>
     )
 }
