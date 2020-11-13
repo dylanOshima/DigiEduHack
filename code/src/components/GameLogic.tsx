@@ -2,6 +2,7 @@ import React, {FormEvent, useState} from "react";
 import { useParams } from 'react-router-dom';
 
 import '../styles/GameView.css'
+import {GameState} from "../models/GameState";
 
 type questionProps = {
     questionText: string,
@@ -10,22 +11,6 @@ type questionProps = {
 type answerProps = {
     onSubmit: any,
 };
-
-export type userType = {
-    username: string,
-    score: number,
-}
-
-export type questionType = {
-    text: string,
-    topics: string[],
-}
-
-export type gameStateType = {
-    users: userType[],
-    questions: questionType[],
-    question_idx: number,
-}
 
 const Question = ({questionText}: questionProps) => (
     <div className="question">
@@ -42,8 +27,8 @@ const Answer = ({onSubmit}: answerProps) => (
     </form>
 );
 
-export default function GameLogic(props: gameStateType) {
-    const { questions, question_idx } = props;
+export default function GameLogic(props: GameState) {
+    const { questions, questionIndex } = props;
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -52,7 +37,7 @@ export default function GameLogic(props: gameStateType) {
 
     return (
         <div className="Game w3-center">
-            <Question questionText={questions[question_idx].text} />
+            <Question questionText={questions[questionIndex].text} />
             <Answer onSubmit={onSubmit} />
         </div>
     )

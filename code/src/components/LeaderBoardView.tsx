@@ -1,66 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {Grid, Paper} from "@material-ui/core";
 import {MenuBar} from "./MenuBar";
-import {AnsweredQuestion} from "../models/AnsweredQuestion";
-import {useParams} from "react-router-dom";
+import {AnsweredQuestion} from "../models/Question";
+import {Link, useParams} from "react-router-dom";
 
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 import "../styles/LeaderBoardView.css";
+import {User} from "../models/User";
+import {UserFeed} from "./Userfeed";
+import {mockAnsweredQuestions, mockGameState} from "../models/MockData";
 
-const mockData: AnsweredQuestion[] = [
-    {
-        question: "Is my dick huge?",
-        answer: "Yes",
-        correct: true
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "No",
-        correct: false
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "Yes",
-        correct: true
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "No",
-        correct: false
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "Yes",
-        correct: true
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "No",
-        correct: false
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "Yes",
-        correct: true
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "No",
-        correct: false
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "Yes",
-        correct: true
-    },
-    {
-        question: "Is my dick huge?",
-        answer: "No",
-        correct: false
-    }
-]
 
 export default function LeaderBoardView() {
     console.log('params: ', useParams());
@@ -69,7 +20,7 @@ export default function LeaderBoardView() {
     const [incorrectQuestions, setIncorrectQuestions] = useState<AnsweredQuestion[]>([]);
 
     useEffect(() => {
-        parseQuestions(mockData);
+        parseQuestions(mockAnsweredQuestions);
     }, [])
 
     const parseQuestions = (questions: AnsweredQuestion[]): void => {
@@ -88,34 +39,99 @@ export default function LeaderBoardView() {
     return (
         <Grid container className="App">
             <MenuBar/>
-            <Grid container item md={12} xs={6}>
-                <Grid container item md={6} xs={6}>
-                </Grid>
-                <Grid container item md={6} xs={6} spacing={2} className="leaderboard-view">
-                    <Paper elevation={0} className="summary-card">
-                        <Grid container>
-                            <Grid item md={12} xs={12}>
-                                <h3>You should review:</h3>
-                            </Grid>
-                            {incorrectQuestions ? incorrectQuestions.map(question => <Grid item md={12} xs={12}>
-                                <AnswerCard {...question}/>
-                            </Grid>) : null}
-                            <Grid item md={12} xs={12}>
-                                <h3>Correct:</h3>
-                            </Grid>
-                            {correctQuestions ? correctQuestions.map(question => <Grid item md={12} xs={12}>
-                                <AnswerCard {...question}/>
-                            </Grid>) : null}
-                        </Grid>
-                    </Paper>
+            <Grid container item md={12} xs={12}>
+                <LeaderBoard users={mockGameState.users}/>
+                <Grid container item md={6} xs={6} className="leaderboard-view">
+                    <SummaryCard correctQuestions={correctQuestions} incorrectQuestions={incorrectQuestions}/>
                 </Grid>
             </Grid>
         </Grid>
     )
 }
 
+interface LeaderBoardProps {
+    users: User[]
+}
+
+const LeaderBoard = (props: LeaderBoardProps) => {
+    const {users} = props;
+    users.sort((a, b) => b.score - a.score);
+    return (
+        <Grid container item md={6} xs={6} style={{marginTop: "10vh"}}>
+            <div>
+                <Grid container spacing={10}>
+                    <Grid item md={12} xs={12} style={{marginLeft: "37%"}}>
+                        <UserFeed username={users[0].username} score={users[0].score}/>
+                    </Grid>
+                    <Grid container item md={12} xs={12} style={{marginLeft: "10%"}}>
+                        <Grid item md={4} xs={4}>
+                            <UserFeed username={users[1].username} score={users[1].score}/>
+                        </Grid>
+                        <Grid item md={4} xs={4}>
+                            <UserFeed username={users[2].username} score={users[2].score}/>
+                        </Grid>
+                        <Grid item md={4} xs={4}>
+                            <UserFeed username={users[3].username} score={users[3].score}/>
+                        </Grid>
+                    </Grid>
+                    <Grid item md={12} xs={12} className="App-menu" style={{marginLeft: "5%"}}>
+                        <Link to="/">
+                            <button className="submit" type="submit"> Back Home</button>
+                        </Link>
+                    </Grid>
+                </Grid>
+            </div>
+        </Grid>
+    )
+}
+
+interface SummaryCardProps {
+    correctQuestions: AnsweredQuestion[];
+    incorrectQuestions: AnsweredQuestion[];
+}
+
+interface TopicCounter {
+    [topic: string]: number
+}
+
+const SummaryCard = (props: SummaryCardProps) => {
+    const {correctQuestions, incorrectQuestions} = props;
+
+    let topicCounter: TopicCounter = {};
+
+    incorrectQuestions.forEach(question => question.topics.forEach(topic => {
+        if (topic in topicCounter) topicCounter[topic] += 1;
+        else topicCounter[topic] = 1;
+    }));
+
+    const counts = Object.entries(topicCounter).sort((a, b) => b[1] - a[1]);
+    const reviewTopics: string[] = counts.slice(0, 4).map(entry => entry[0]);
+
+    return (
+        <Paper elevation={0} className="summary-card">
+            <Grid container>
+                <Grid item md={12} xs={12}>
+                    <h3>You should focus your review on:</h3>
+                </Grid>
+                <Grid item md={12} xs={12}>
+                    {reviewTopics.join(", ")}
+                </Grid>
+                {incorrectQuestions ? incorrectQuestions.map(question => <Grid item md={12} xs={12}>
+                    <AnswerCard {...question}/>
+                </Grid>) : null}
+                <Grid item md={12} xs={12}>
+                    <h3>Correct:</h3>
+                </Grid>
+                {correctQuestions ? correctQuestions.map(question => <Grid item md={12} xs={12}>
+                    <AnswerCard {...question}/>
+                </Grid>) : null}
+            </Grid>
+        </Paper>
+    )
+}
+
 const AnswerCard = (props: AnsweredQuestion) => {
-    const {correct, question, answer} = props;
+    const {correct, text, answer} = props;
 
     let icon;
     if (correct) icon = <CheckCircleIcon style={{fill: "green"}}/>
@@ -123,14 +139,14 @@ const AnswerCard = (props: AnsweredQuestion) => {
     return (
         <Paper className="answer-card">
             <Grid container>
-                <Grid item md={3}>
+                <Grid item md={2}>
                     {icon}
                 </Grid>
-                <Grid item md={5}>
-                    {props.question}
+                <Grid item md={6}>
+                    {text}
                 </Grid>
                 <Grid item md={4}>
-                    {props.answer}
+                    {answer}
                 </Grid>
             </Grid>
         </Paper>
