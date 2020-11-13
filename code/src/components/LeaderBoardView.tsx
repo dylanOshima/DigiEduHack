@@ -63,7 +63,7 @@ const LeaderBoard = (props: LeaderBoardProps) => {
                     <Grid item md={12} xs={12} style={{marginLeft: "37%"}}>
                         <UserFeed username={users[0].username} score={users[0].score}/>
                     </Grid>
-                    <Grid container item md={12} xs={12} style={{marginLeft: "10%"}}>
+                    <Grid container item md={12} xs={12} style={{marginLeft: "10%", marginTop:"1em"}}>
                         <Grid item md={4} xs={4}>
                             <UserFeed username={users[1].username} score={users[1].score}/>
                         </Grid>
@@ -74,7 +74,7 @@ const LeaderBoard = (props: LeaderBoardProps) => {
                             <UserFeed username={users[3].username} score={users[3].score}/>
                         </Grid>
                     </Grid>
-                    <Grid item md={12} xs={12} className="App-menu" style={{marginLeft: "5%"}}>
+                    <Grid item md={12} xs={12} className="App-menu" style={{marginLeft: "3%", marginTop:"4em"}}>
                         <Link to="/">
                             <button className="submit" type="submit"> Back Home</button>
                         </Link>

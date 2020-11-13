@@ -59,6 +59,7 @@ button:hover {
     top: 0;
     left: 0;
     height: 10vh;
+    color: white;
 }
 
 .nav-bar-item {
@@ -70,4 +71,8 @@ button:hover {
     color: rgb(0, 0, 0);
     transition: all 0.14s ease-in 0s;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 5px 0px, rgba(0, 0, 0, 0.12) 0px 2px 10px 0px;
+}
+
+input.card {
+    text-align: center;
 }

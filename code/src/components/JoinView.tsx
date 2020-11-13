@@ -20,23 +20,23 @@ export default function JoinView() {
             <Logo/>
             <h3 style={{marginBottom: "2em"}}>Join a Sesh</h3>
             <form className="form-group" onSubmit={onSubmit} autoComplete="off">
-                <Grid container spacing={2}>
+                <Grid container spacing={4}>
                     <Grid container item spacing={1} xs={12} md={12}>
                         <Grid item md={6} xs={6} className="vertical-center">
-                            <h5>Session ID</h5>
+                            <h4>Session ID</h4>
                         </Grid>
-                        <Grid item md={6} xs={6} className="vertical-center">
-                            <TextField id="sessionId" variant="outlined" value={sessionId}
-                                       onChange={(e) => setSessionId(e.target.value)}/>
+                        <Grid item md={6} xs={6} className="vertical-center answer">
+                            <input id="sessionId" type="text" className="card"
+                                   onChange={(e) => setSessionId(e.target.value)}/>
                         </Grid>
                     </Grid>
                     <Grid container item spacing={1} xs={12} md={12}>
                         <Grid item md={6} xs={6} className="vertical-center">
-                            <h5>Your Name</h5>
+                            <h4>Your Name</h4>
                         </Grid>
-                        <Grid item md={6} xs={6} className="vertical-center">
-                            <TextField id="username" variant="outlined" value={username}
-                                       onChange={(e) => setUsername(e.target.value)}/>
+                        <Grid item md={6} xs={6} className="vertical-center answer">
+                            <input id="username" type="text" className="card"
+                                   onChange={(e) => setUsername(e.target.value)}/>
                         </Grid>
                     </Grid>
                     <Grid item md={12} xs={12} className="App-menu">
