@@ -1,0 +1,9 @@
+
+.video-wrapper {
+  position: absolute;
+  bottom: 2rem;
+}
+
+.video-wrapper video {
+  margin: 1rem;
+}

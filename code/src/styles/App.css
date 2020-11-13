@@ -2,7 +2,7 @@
 
 *{font-family: 'Indie Flower', cursive !important;}
 
-html {background-color: #4257b4;}
+ html {background-color: #4257b4; font-size: 1.3em}
 
 .App {
     text-align: center;
@@ -13,7 +13,7 @@ html {background-color: #4257b4;}
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
+    /* color: white; */
 }
 
 .App-header {
@@ -63,4 +63,11 @@ html {background-color: #4257b4;}
 
 .nav-bar-item {
     margin-top: 1em !important;
+}
+
+.card {
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    transition: all 0.14s ease-in 0s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 5px 0px, rgba(0, 0, 0, 0.12) 0px 2px 10px 0px;
 }

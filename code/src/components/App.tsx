@@ -13,6 +13,7 @@ import CreateView from "./CreateView";
 import {NavBar} from "./NavBar";
 import LeaderBoardView from "./LeaderBoardView";
 import GameView from "./GameView";
+import Video from "./Video";
 
 function App() {
     return (
@@ -43,6 +44,9 @@ function App() {
                 </Route>
                 <Route path="/session/:sessionId">
                     <GameView id={"Ciao"} />
+                </Route>
+                <Route path="/test/video/">
+                    <Video />
                 </Route>
             </Switch>
         </Router>
