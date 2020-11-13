@@ -77,8 +77,24 @@ const voteAnswer = (id: string, answer: Answer, change: number) => (
                 .update({answers: [...n]});
             if (n.some(({votes}: any) => votes >= 3)) {
             // if (n >= 3) {
+                correctAnswer(id, answer);
                 nextQuestion(id);
             }
+        })
+);
+
+export const correctAnswer = (id: string, answer: Answer) => (
+    getGameData(id)
+        .then((data: any) => {
+            const n = data.users.map((u: any) => {
+                if (u.username === answer.user.username) {
+                    return {...u, score: u.score + 100};
+                }
+                return u;
+            });
+            db.collection("sessions")
+                .doc(id)
+                .update({users: [...n]});
         })
 );
 
