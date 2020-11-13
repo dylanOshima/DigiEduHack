@@ -1,29 +1,34 @@
-import React, {FormEvent, useEffect, useState} from "react";
-import { useHistory } from 'react-router-dom';
+import React, {FormEvent, useContext, useEffect, useState} from "react";
+import {useHistory} from 'react-router-dom';
 import {Logo} from "./Logo";
 import {Button, Grid, TextField} from "@material-ui/core";
 import Loader from 'react-loader-spinner';
 
-import { createSession } from '../firebase';
+import {createSession, joinSession} from '../firebase';
 
 import '../styles/JoinView.css'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import {NavBar} from "./NavBar";
+import {CurrentUser} from "./App";
 
 export default function CreateView() {
-    // const [studySet, setStudySet]: [string, (arg: string) => void] = useState("");
-    const [username, setUsername] = useState<string>("");
-    const [sessionId, setSessionId]= useState<string>("")
+    // @ts-ignore
+    const {username, setUsername} = useContext(CurrentUser);
+    const [sessionId, setSessionId] = useState<string>("")
     const [error, setError] = useState<string>("")
 
     const history = useHistory();
-    useEffect(() => {createSession().then((id) => history.push(`/join/${id}`))}, []);
+    useEffect(() => {
+        createSession().then((id: string) => setSessionId(id)).catch((err: string) => setError(err))
+    }, []);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const CurrentUser = React.createContext(username);
         console.log(username);
-        // createSession((id: any) => history.push(`/join/${id}`));
+        joinSession(sessionId, username).then(() => history.push(`/session/${sessionId}`));
     }
+
     return (
         <Grid container className="App">
             <NavBar/>
@@ -34,22 +39,22 @@ export default function CreateView() {
                     <React.Fragment>
                         <h3 style={{marginBottom: "2em"}}>Start a new Sesh</h3>
                         <form className="form-group" onSubmit={onSubmit} autoComplete="off">
-                            <Grid container spacing={2}>
+                            <Grid container spacing={4}>
                                 <Grid container item spacing={1} xs={12} md={12}>
                                     <Grid item md={6} xs={6}>
-                                        <h5>Session ID</h5>
+                                        <h4>Session ID</h4>
                                     </Grid>
                                     <Grid item md={6} xs={6} className="vertical-center">
-                                        {sessionId}
+                                        <h4>{sessionId.split("").join(" ")}</h4>
                                     </Grid>
                                 </Grid>
                                 <Grid container item spacing={1} xs={12} md={12}>
                                     <Grid item md={6} xs={6} className="vertical-center">
-                                        <h5>Your Name</h5>
+                                        <h4>Your Name</h4>
                                     </Grid>
-                                    <Grid item md={6} xs={6} className="vertical-center">
-                                        <TextField id="username" variant="outlined" value={username}
-                                                   onChange={(e) => setUsername(e.target.value)}/>
+                                    <Grid item md={6} xs={6} className="vertical-center answer">
+                                        <input id="username" type="text" className="card" value={username}
+                                               onChange={(e) => setUsername(e.target.value)}/>
                                     </Grid>
                                 </Grid>
                                 <Grid item md={12} xs={12} className="App-menu">

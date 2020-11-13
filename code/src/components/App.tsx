@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,48 +17,53 @@ import Video from "./Video";
 import Mock from "./Mock";
 import {Grid} from "@material-ui/core";
 
+export const CurrentUser = React.createContext({});
+
 function App() {
+    const [username, setUsername] = useState<string>("");
     return (
-        <Router>
-            <Switch>
-                <Route exact path="/">
-                    <div className="App">
-                        <NavBar/>
-                        <Logo/>
-                        <Grid container spacing={3}className="App-menu">
-                            <Grid item md={12} xs={12}>
-                                <Link to="/create">
-                                    <button className="submit" type="submit">Start a Sesh</button>
-                                </Link>
+        <CurrentUser.Provider value={{username: username, setUsername: setUsername}}>
+            <Router>
+                <Switch>
+                    <Route exact path="/">
+                        <div className="App">
+                            <NavBar/>
+                            <Logo/>
+                            <Grid container spacing={3} className="App-menu">
+                                <Grid item md={12} xs={12}>
+                                    <Link to="/create">
+                                        <button className="submit" type="submit">Start a Sesh</button>
+                                    </Link>
+                                </Grid>
+                                <Grid item md={12} xs={12}>
+                                    <Link to="/join">
+                                        <button className="submit" type="submit">Join a Sesh</button>
+                                    </Link>
+                                </Grid>
                             </Grid>
-                            <Grid item md={12} xs={12}>
-                                <Link to="/join">
-                                    <button className="submit" type="submit">Join a Sesh</button>
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </div>
-                </Route>
-                <Route exact path="/create">
-                    <CreateView/>
-                </Route>
-                <Route exact path="/join">
-                    <JoinView/>
-                </Route>
-                <Route exact path="/session/:sessionId/leaderboard">
-                    <LeaderBoardView/>
-                </Route>
-                <Route exact path="/session/:sessionId">
-                    <GameView id={"Ciao"}/>
-                </Route>
-                <Route exact path="/mock">
-                    <Mock/>
-                </Route>
-                <Route exact path="/test/video/">
-                    <Video/>
-                </Route>
-            </Switch>
-        </Router>
+                        </div>
+                    </Route>
+                    <Route exact path="/create">
+                        <CreateView/>
+                    </Route>
+                    <Route exact path="/join">
+                        <JoinView/>
+                    </Route>
+                    <Route exact path="/session/:sessionId/leaderboard">
+                        <LeaderBoardView/>
+                    </Route>
+                    <Route exact path="/session/:sessionId">
+                        <GameView id={"Ciao"}/>
+                    </Route>
+                    <Route exact path="/mock">
+                        <Mock/>
+                    </Route>
+                    <Route exact path="/test/video/">
+                        <Video/>
+                    </Route>
+                </Switch>
+            </Router>
+        </CurrentUser.Provider>
     );
 }
 
